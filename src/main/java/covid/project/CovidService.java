@@ -77,7 +77,7 @@ public class CovidService {
         if (!isListaTratada){
             try {
                 System.out.println("EXISTEM DADOS DUPLICADOS NA LISTA!");
-                Thread.sleep(2000); // Wait for 2 seconds before printing the menu
+                Thread.sleep(2000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -114,13 +114,12 @@ public class CovidService {
 
 
     private void listarCasosPeriodo() {
-
         Collections.sort(listaDeCasos);
 
-        if (!isListaTratada){
+        if (!isListaTratada) {
             try {
                 System.out.println("EXISTEM DADOS DUPLICADOS NA LISTA!");
-                Thread.sleep(2000); // Wait for 2 seconds before printing the menu
+                Thread.sleep(2000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -134,23 +133,25 @@ public class CovidService {
             Date inicio = dateFormat.parse(dataInicio);
             Date fim = dateFormat.parse(dataFim);
 
-            Covid ultimoCaso = null;
+            Covid casoInicio = new Covid(inicio, 0, 0, 0);
+            Covid casoFim = new Covid(fim, 0, 0, 0);
 
-            for (Covid caso : listaDeCasos) {
-                if (caso.getData().compareTo(inicio) >= 0 && caso.getData().compareTo(fim) <= 0) {
-                    ultimoCaso = caso;
-                }
-            }
+            int indiceInicio = Collections.binarySearch(listaDeCasos, casoInicio);
+            int indiceFim = Collections.binarySearch(listaDeCasos, casoFim);
 
-            if (ultimoCaso == null) {
-                System.out.println("Não foram encontrados casos no período especificado.");
+            if (indiceInicio >= 0 && indiceFim >= 0) {
+                System.out.println("Casos no período de " + dataInicio + " a " + dataFim + ":");
+
+                Covid ultimoCaso = listaDeCasos.get(indiceFim);
+                System.out.println("O total de casos no período de " + dataInicio + " a " + dataFim + ": " + ultimoCaso.getCasos());
             } else {
-                System.out.println("O total de casos no período de " + dataInicio + " a " + dataFim + ":" + ultimoCaso.getCasos());
+                System.out.println("Não foram encontrados casos no período especificado.");
             }
         } catch (ParseException e) {
             System.out.println("Data inválida. Certifique-se de digitar as datas no formato dd/MM/yyyy.");
         }
     }
+
 
 
 
@@ -174,7 +175,7 @@ public class CovidService {
         if (!isListaTratada){
             try {
                 System.out.println("EXISTEM DADOS DUPLICADOS NA LISTA!");
-                Thread.sleep(2000); // Wait for 2 seconds before printing the menu
+                Thread.sleep(2000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -215,7 +216,7 @@ public class CovidService {
         if (!isListaTratada){
             try {
                 System.out.println("EXISTEM DADOS DUPLICADOS NA LISTA!");
-                Thread.sleep(2000); // Wait for 2 seconds before printing the menu
+                Thread.sleep(2000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -229,7 +230,7 @@ public class CovidService {
             for (Covid casos : listaDeCasos) {
                 sb.append("\t").append(casos).append(",\n");
             }
-            sb.setLength(sb.length() - 2); // Remover a vírgula extra após o último funcionário
+            sb.setLength(sb.length() - 2);
             sb.append("\n]");
         }
 
