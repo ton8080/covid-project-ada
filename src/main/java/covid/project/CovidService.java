@@ -104,7 +104,7 @@ public class Menu {
 
     private void carregaMenu() {
         System.out.println("********  DIGITE A OPÇÃO DESEJADA   ******");
-        System.out.println("1 - ATUALIZAR DADOS");
+        System.out.println("1 - LISTAR POR PERIODO");
         System.out.println("2 - LISTAR CASOS POR DIA)");
         System.out.println("3 - LISTAR OBITOS POR DIA");
         System.out.println("4 - LISTAR CASOS");
