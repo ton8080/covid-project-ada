@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 
-public class Covid {
+public class Covid implements Comparable<Covid> {
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy");
 
     private Date data;
@@ -55,9 +55,9 @@ public class Covid {
     public String toString() {
         return "Covid{" +
                 "data=" + DATE_FORMAT.format(data) +
-                ", casos=" + casos +
-                ", casosPorDia=" + casosPorDia +
-                ", obitosPorDia=" + obitosPorDia +
+                ", Casos=" + casos +
+                ", Casos_Por_Dia=" + casosPorDia +
+                ", Obitos_Por_Dia=" + obitosPorDia +
                 '}';
     }
 
@@ -75,5 +75,10 @@ public class Covid {
     @Override
     public int hashCode() {
         return Objects.hash(data, casos, casosPorDia, obitosPorDia);
+    }
+
+    @Override
+    public int compareTo(Covid other) {
+        return this.data.compareTo(other.data);
     }
 }

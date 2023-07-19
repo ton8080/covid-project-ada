@@ -5,18 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c442298d-580f-41eb-bd14-0ca48e13b175" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/covid/project/App.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/covid/project/CarregarDadosExternos.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/covid/project/Covid.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/covid/project/EntradaDeDados.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/covid/project/Menu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/covid/project/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/covid/project/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/covid/project/CarregarDadosExternos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/covid/project/CarregarDadosExternos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/covid/project/Covid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/covid/project/Covid.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/covid/project/CovidService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/covid/project/CovidService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/covid/project/EntradaDeDados.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/covid/project/EntradaDeDados.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Dados-covid-19-estado - Dados-covid-19-estado.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Dados-covid-19-estado - Dados-covid-19-estado.csv" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -4,7 +4,7 @@ public class App {
 
     public static void main(String[] args) {
         try(EntradaDeDados leitor = new EntradaDeDados()) {
-            new Menu(leitor).processar();
+            new CovidService(leitor).processar();
         }
     }
 

@@ -12,7 +12,14 @@ public class EntradaDeDados implements AutoCloseable {
         scanner.useLocale(Locale.US);
     }
 
-    public String obterEntrada(){
+    public String obterEntrada() {
+        return obterEntrada("");
+    }
+
+    public String obterEntrada(String prompt) {
+        if (!prompt.isEmpty()) {
+            System.out.print(prompt);
+        }
         return scanner.nextLine();
     }
 
