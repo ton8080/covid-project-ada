@@ -17,6 +17,8 @@ public class CovidService {
     private final String OPCAO_LISTAR_CASOS = "4";
     private final String OPCAO_TIRAR_DADOS_DUPLICADOS = "5";
 
+    private Boolean isListaTratada = false;
+
 
     public CovidService(EntradaDeDados leitor) {
         this.leitor = leitor;
@@ -59,7 +61,8 @@ public class CovidService {
             case OPCAO_TIRAR_DADOS_DUPLICADOS:
                 pularLinha(2);
                 tirarDadosDuplicados();
-                System.out.println("DADOS DUPLICADOS EXCLUIDOS");
+                System.out.println("DADOS DUPLICADOS EXCLUIDOS!");
+                pularLinha(2);
                 break;
             default:
                 opcaoInvalida();
@@ -68,6 +71,18 @@ public class CovidService {
     }
 
     private void listarPorPeriodo() {
+
+        Collections.sort(listaDeCasos);
+
+        if (!isListaTratada){
+            try {
+                System.out.println("EXISTEM DADOS DUPLICADOS NA LISTA!");
+                Thread.sleep(2000); // Wait for 2 seconds before printing the menu
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
         System.out.println("Digite as datas no formato dd/MM/yyyy.");
         String dataInicio = leitor.obterEntrada("Digite a data de início: ");
         String dataFim = leitor.obterEntrada("Digite a data de fim: ");
@@ -77,21 +92,19 @@ public class CovidService {
             Date inicio = dateFormat.parse(dataInicio);
             Date fim = dateFormat.parse(dataFim);
 
-            List<Covid> casosNoPeriodo = new ArrayList<>();
+            Covid casoInicio = new Covid(inicio, 0, 0, 0);
+            Covid casoFim = new Covid(fim, 0, 0, 0);
 
-            for (Covid caso : listaDeCasos) {
-                if (caso.getData().compareTo(inicio) >= 0 && caso.getData().compareTo(fim) <= 0) {
-                    casosNoPeriodo.add(caso);
-                }
-            }
+            int indiceInicio = Collections.binarySearch(listaDeCasos, casoInicio);
+            int indiceFim = Collections.binarySearch(listaDeCasos, casoFim);
 
-            if (casosNoPeriodo.isEmpty()) {
-                System.out.println("Não foram encontrados casos no período especificado.");
-            } else {
+            if (indiceInicio >= 0 && indiceFim >= 0) {
                 System.out.println("Casos no período de " + dataInicio + " a " + dataFim + ":");
-                for (Covid caso : casosNoPeriodo) {
-                    System.out.println(caso);
+                for (int i = indiceInicio; i <= indiceFim; i++) {
+                    System.out.println(listaDeCasos.get(i));
                 }
+            } else {
+                System.out.println("Não foram encontrados casos no período especificado.");
             }
         } catch (ParseException e) {
             System.out.println("Data inválida. Certifique-se de digitar as datas no formato dd/MM/yyyy.");
@@ -99,7 +112,19 @@ public class CovidService {
     }
 
 
+
     private void listarCasosPeriodo() {
+
+        Collections.sort(listaDeCasos);
+
+        if (!isListaTratada){
+            try {
+                System.out.println("EXISTEM DADOS DUPLICADOS NA LISTA!");
+                Thread.sleep(2000); // Wait for 2 seconds before printing the menu
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
         System.out.println("Digite as datas no formato dd/MM/yyyy.");
         String dataInicio = leitor.obterEntrada("Digite a data de início: ");
         String dataFim = leitor.obterEntrada("Digite a data de fim: ");
@@ -120,8 +145,7 @@ public class CovidService {
             if (ultimoCaso == null) {
                 System.out.println("Não foram encontrados casos no período especificado.");
             } else {
-                System.out.println("O total de casos no período de " + dataInicio + " a " + dataFim + ":");
-                System.out.println(ultimoCaso.getCasos());
+                System.out.println("O total de casos no período de " + dataInicio + " a " + dataFim + ":" + ultimoCaso.getCasos());
             }
         } catch (ParseException e) {
             System.out.println("Data inválida. Certifique-se de digitar as datas no formato dd/MM/yyyy.");
@@ -129,11 +153,13 @@ public class CovidService {
     }
 
 
+
     private void tirarDadosDuplicados() {
         Set<Covid> setCovid = new HashSet<>();
         setCovid.addAll(listaDeCasos);
         listaDeCasos.clear();
         listaDeCasos.addAll(setCovid);
+        isListaTratada = true;
     }
 
     public void pularLinha(int numeroDeLinhas) {
@@ -143,6 +169,16 @@ public class CovidService {
     }
 
     private void listarObitosDia() {
+        Collections.sort(listaDeCasos);
+
+        if (!isListaTratada){
+            try {
+                System.out.println("EXISTEM DADOS DUPLICADOS NA LISTA!");
+                Thread.sleep(2000); // Wait for 2 seconds before printing the menu
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
         System.out.println("Digite as datas no formato dd/MM/yyyy.");
         String dataInicio = leitor.obterEntrada("Digite a data de início: ");
         String dataFim = leitor.obterEntrada("Digite a data de fim: ");
@@ -152,16 +188,21 @@ public class CovidService {
             Date inicio = dateFormat.parse(dataInicio);
             Date fim = dateFormat.parse(dataFim);
 
-            int somaObitos = 0;
+            Covid casoInicio = new Covid(inicio, 0, 0, 0);
+            Covid casoFim = new Covid(fim, 0, 0, 0);
 
-            for (Covid caso : listaDeCasos) {
-                if (caso.getData().compareTo(inicio) >= 0 && caso.getData().compareTo(fim) <= 0) {
-                    somaObitos += caso.getObitosPorDia();
+            int indiceInicio = Collections.binarySearch(listaDeCasos, casoInicio);
+            int indiceFim = Collections.binarySearch(listaDeCasos, casoFim);
+
+            if (indiceInicio >= 0 && indiceFim >= 0) {
+                int somaObitos = 0;
+                for (int i = indiceInicio; i <= indiceFim; i++) {
+                    somaObitos += listaDeCasos.get(i).getObitosPorDia();
                 }
+                System.out.println("A soma de óbitos no período de " + dataInicio + " a " + dataFim + " é: " + somaObitos);
+            } else {
+                System.out.println("Não foram encontrados casos no período especificado.");
             }
-
-            System.out.println("A soma de óbitos no período de " + dataInicio + " a " + dataFim + " é: " + somaObitos);
-
         } catch (ParseException e) {
             System.out.println("Data inválida. Certifique-se de digitar as datas no formato dd/MM/yyyy.");
         }
@@ -169,6 +210,16 @@ public class CovidService {
 
 
     private void listarCasos() {
+        Collections.sort(listaDeCasos);
+
+        if (!isListaTratada){
+            try {
+                System.out.println("EXISTEM DADOS DUPLICADOS NA LISTA!");
+                Thread.sleep(2000); // Wait for 2 seconds before printing the menu
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
         StringBuilder sb = new StringBuilder();
 
         if (listaDeCasos.isEmpty()) {

@@ -54,7 +54,6 @@ public class CarregarDadosExternos {
             throw new RuntimeException(e);
         }
 
-        Collections.sort(casos);
         return casos;
     }
 }
